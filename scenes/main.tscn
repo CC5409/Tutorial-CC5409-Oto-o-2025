@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cux5u1j16853y"]
+
+[ext_resource type="Script" uid="uid://bec3uy1704laf" path="res://scenes/main.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://c07wh61rs3224" path="res://scenes/player.tscn" id="2_0wfyh"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_o5qli")
+player_scene = ExtResource("2_0wfyh")
+
+[node name="Players" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Markers"]
+position = Vector2(196, 359)
+gizmo_extents = 225.4
+
+[node name="Marker2D2" type="Marker2D" parent="Markers"]
+position = Vector2(944, 359)
+gizmo_extents = 225.4

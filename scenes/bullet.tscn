@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqofq1y6rbw5b"]
+
+[ext_resource type="Texture2D" uid="uid://dnyo8j2sr7b0m" path="res://assets/guns/GunsPack/Bullets/RifleAmmoBig.png" id="1_y25gk"]
+[ext_resource type="Script" uid="uid://crfmjse533gsm" path="res://scenes/bullet.gd" id="2_y25gk"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y25gk"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y25gk"]
+radius = 2.0
+
+[node name="Bullet" type="Area2D"]
+z_index = 1
+script = ExtResource("2_y25gk")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_y25gk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_y25gk")
+offset = Vector2(0, -0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y25gk")
