@@ -1,8 +1,10 @@
 class_name InputSynchronizer
 extends MultiplayerSynchronizer
 
+
 @export var move_input: Vector2
 @export var fire: bool
+
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():

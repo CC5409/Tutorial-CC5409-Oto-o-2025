@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var sync_timer: Timer = $SyncTimer
 @onready var gun: Node2D = $Gun
+@onready var camera_2d: Camera2D = $Camera2D
 
 
 func _physics_process(delta: float) -> void:
@@ -53,6 +54,7 @@ func setup(player_data: Statics.PlayerData):
 	set_multiplayer_authority(player_data.id, false)
 	input_synchronizer.set_multiplayer_authority(player_data.id)
 	gun.setup(player_data)
+	camera_2d.enabled = is_multiplayer_authority()
 	if is_multiplayer_authority():
 		sync_timer.timeout.connect(_on_sync)
 		sync_timer.start()

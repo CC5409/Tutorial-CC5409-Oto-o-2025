@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cffwwnqnluc3u"]
+[gd_scene load_steps=6 format=3 uid="uid://cffwwnqnluc3u"]
 
 [ext_resource type="Script" uid="uid://4d7285h3i1rs" path="res://scenes/gun.gd" id="1_og67c"]
 [ext_resource type="Texture2D" uid="uid://dnck1k687o1a8" path="res://assets/guns/GunsPack/Guns/M15.png" id="1_x77fm"]
 [ext_resource type="PackedScene" uid="uid://dqofq1y6rbw5b" path="res://scenes/bullet.tscn" id="2_gp1hk"]
+[ext_resource type="Script" uid="uid://ddcfp2cehquls" path="res://components/flip_sprite.gd" id="4_qd4js"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gp1hk"]
 properties/0/path = NodePath(".:rotation")
@@ -16,9 +17,13 @@ bullet_scene = ExtResource("2_gp1hk")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)
 texture = ExtResource("1_x77fm")
+region_enabled = true
+region_rect = Rect2(0, -4, 32, 19)
+script = ExtResource("4_qd4js")
+metadata/_custom_type_script = "uid://ddcfp2cehquls"
 
 [node name="BulletSpawn" type="Marker2D" parent="."]
-position = Vector2(45, -6)
+position = Vector2(45, 0)
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://dqofq1y6rbw5b")
