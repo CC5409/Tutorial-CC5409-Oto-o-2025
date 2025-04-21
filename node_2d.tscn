@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://1k7k7so0h075"]
+
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://cnq48l6k61ac2" path="res://rigid_body_2d.gd" id="2_0e48y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epypp"]
+radius = 512.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wtcfe"]
+radius = 130.3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0e48y"]
+radius = 64.4981
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(455, 598)
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(36, -80)
+scale = Vector2(8, 8)
+texture = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_epypp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area2D"]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/StaticBody2D"]
+shape = SubResource("CircleShape2D_wtcfe")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(1346, 550)
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_epypp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area2D2"]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2/StaticBody2D"]
+shape = SubResource("CircleShape2D_wtcfe")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(637, 380)
+gravity_scale = 0.5
+script = ExtResource("2_0e48y")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_0e48y")

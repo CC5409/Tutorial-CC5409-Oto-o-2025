@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cffwwnqnluc3u"]
+[gd_scene load_steps=8 format=3 uid="uid://cffwwnqnluc3u"]
 
 [ext_resource type="Script" uid="uid://4d7285h3i1rs" path="res://scenes/gun.gd" id="1_og67c"]
 [ext_resource type="Texture2D" uid="uid://dnck1k687o1a8" path="res://assets/guns/GunsPack/Guns/M15.png" id="1_x77fm"]
 [ext_resource type="PackedScene" uid="uid://dqofq1y6rbw5b" path="res://scenes/bullet.tscn" id="2_gp1hk"]
 [ext_resource type="Script" uid="uid://ddcfp2cehquls" path="res://components/flip_sprite.gd" id="4_qd4js"]
+[ext_resource type="Script" uid="uid://cq5t7iyk6uo5e" path="res://components/hitbox.gd" id="5_6b133"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_haq8l"]
+radius = 12.0416
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gp1hk"]
 properties/0/path = NodePath(".:rotation")
@@ -24,6 +28,15 @@ metadata/_custom_type_script = "uid://ddcfp2cehquls"
 
 [node name="BulletSpawn" type="Marker2D" parent="."]
 position = Vector2(45, 0)
+
+[node name="Hitbox" type="Area2D" parent="BulletSpawn"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("5_6b133")
+metadata/_custom_type_script = "uid://cq5t7iyk6uo5e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletSpawn/Hitbox"]
+shape = SubResource("CircleShape2D_haq8l")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://dqofq1y6rbw5b")

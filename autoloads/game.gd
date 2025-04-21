@@ -5,6 +5,8 @@ signal player_updated(id)
 signal vote_updated(id)
 signal player_index_received()
 
+signal enemies_changed
+
 @export var multiplayer_test = false
 @export var use_roles = true
 @export var unique_roles = true # won't start with repeated roles
@@ -13,6 +15,13 @@ signal player_index_received()
 @export var fill_screen = true
 @export var test_players: Array[PlayerDataResource] = [] # first one is server
 @export var main_scene: PackedScene
+
+var enemies: int = 0:
+	set(value):
+		if enemies == value:
+			return
+		enemies = value
+		enemies_changed.emit(enemies)
 
 var players: Array[Statics.PlayerData] = []
 var change_window_scale := true :

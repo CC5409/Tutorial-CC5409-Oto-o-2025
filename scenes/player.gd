@@ -1,4 +1,7 @@
+class_name Player
 extends CharacterBody2D
+
+signal enemy_spawn_requested
 
 @export var max_speed = 400
 @export var acceleration = 600
@@ -45,6 +48,8 @@ func _input(event: InputEvent) -> void:
 	if is_multiplayer_authority():
 		if event.is_action_pressed("test"):
 			test.rpc(1)
+		if event.is_action_pressed("spawn"):
+			request_spawn.rpc_id(1, get_global_mouse_position())
 
 
 func setup(player_data: Statics.PlayerData):
@@ -79,3 +84,13 @@ func fire(spawn_position: Vector2):
 
 func _on_sync() -> void:
 	send_data.rpc(position, velocity)
+
+
+func take_damage(damage: int) -> void:
+	Debug.log("%s took %d damage" % [name, damage])
+
+@rpc("any_peer", "call_local", "reliable")
+func request_spawn(pos: Vector2) -> void:
+	if not multiplayer.is_server():
+		return
+	enemy_spawn_requested.emit(pos)
