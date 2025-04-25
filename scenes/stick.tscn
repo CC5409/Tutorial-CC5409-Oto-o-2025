@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2u7grg7i2e0b"]
+
+[ext_resource type="Script" uid="uid://c41grlee2rpa2" path="res://scenes/stick.gd" id="1_i3vek"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mvdot"]
+properties/0/path = NodePath(".:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Stick" type="Node2D"]
+script = ExtResource("1_i3vek")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mvdot")

@@ -1,10 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://c07wh61rs3224"]
+[gd_scene load_steps=25 format=3 uid="uid://c07wh61rs3224"]
 
 [ext_resource type="Script" uid="uid://bjq73fe7gl45g" path="res://scenes/player.gd" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://b47h15nubebbj" path="res://assets/characters/Robot Warfare Asset Pack 22-11-24/Soldiers/MachineGunner-Class.png" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://dqofq1y6rbw5b" path="res://scenes/bullet.tscn" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://ctln51h6jtqos" path="res://scenes/input_synchronizer.tscn" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dk53cpw3hm7gn" path="res://components/shaking_camera.gd" id="5_fjrip"]
 [ext_resource type="PackedScene" uid="uid://cffwwnqnluc3u" path="res://scenes/gun.tscn" id="5_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://d2u7grg7i2e0b" path="res://scenes/stick.tscn" id="5_tuyoq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 13.1529
@@ -165,10 +167,10 @@ vframes = 7
 process_callback = 0
 wait_time = 0.1
 
-[node name="Gun" parent="." instance=ExtResource("5_qlg0r")]
-position = Vector2(74, -53)
-
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+script = ExtResource("5_fjrip")
+metadata/_custom_type_script = "uid://dk53cpw3hm7gn"
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
@@ -181,3 +183,10 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_tuyoq")
 step = 1.0
 value = 50.0
 show_percentage = false
+
+[node name="Stick" parent="." instance=ExtResource("5_tuyoq")]
+position = Vector2(0, -24)
+
+[node name="Gun" parent="Stick" instance=ExtResource("5_qlg0r")]
+unique_name_in_owner = true
+position = Vector2(58, 0)
