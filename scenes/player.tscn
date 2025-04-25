@@ -1,9 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://c07wh61rs3224"]
+[gd_scene load_steps=23 format=3 uid="uid://c07wh61rs3224"]
 
 [ext_resource type="Script" uid="uid://bjq73fe7gl45g" path="res://scenes/player.gd" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://b47h15nubebbj" path="res://assets/characters/Robot Warfare Asset Pack 22-11-24/Soldiers/MachineGunner-Class.png" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://dqofq1y6rbw5b" path="res://scenes/bullet.tscn" id="3_qhqgy"]
-[ext_resource type="PackedScene" uid="uid://djow5g6d3nsyy" path="res://components/health_component.tscn" id="3_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://ctln51h6jtqos" path="res://scenes/input_synchronizer.tscn" id="4_dqkch"]
 [ext_resource type="PackedScene" uid="uid://cffwwnqnluc3u" path="res://scenes/gun.tscn" id="5_qlg0r"]
 
@@ -126,8 +125,6 @@ bg_color = Color(0.283357, 0.849587, 2.31028e-06, 1)
 motion_mode = 1
 script = ExtResource("2_g2els")
 bullet_scene = ExtResource("3_qhqgy")
-
-[node name="HealthComponent2" parent="." instance=ExtResource("3_tuyoq")]
 
 [node name="Label" type="Label" parent="."]
 offset_left = -60.0
