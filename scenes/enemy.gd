@@ -40,7 +40,7 @@ func _physics_process(delta):
 		navigation_agent.set_velocity(new_velocity)
 	else:
 		_on_velocity_computed(new_velocity)
-	send_pos.rpc(global_position)
+	#send_pos.rpc(global_position)
 
 func take_damage() -> void:
 	Debug.log("%s took damage" % [name])
