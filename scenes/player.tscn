@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b47h15nubebbj" path="res://assets/characters/Robot Warfare Asset Pack 22-11-24/Soldiers/MachineGunner-Class.png" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://dqofq1y6rbw5b" path="res://scenes/bullet.tscn" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://ctln51h6jtqos" path="res://scenes/input_synchronizer.tscn" id="4_dqkch"]
-[ext_resource type="Script" uid="uid://dk53cpw3hm7gn" path="res://components/shaking_camera.gd" id="5_fjrip"]
+[ext_resource type="Script" path="res://components/shaking_camera.gd" id="5_fjrip"]
 [ext_resource type="PackedScene" uid="uid://cffwwnqnluc3u" path="res://scenes/gun.tscn" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://d2u7grg7i2e0b" path="res://scenes/stick.tscn" id="5_tuyoq"]
 
@@ -170,7 +170,6 @@ wait_time = 0.1
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 script = ExtResource("5_fjrip")
-metadata/_custom_type_script = "uid://dk53cpw3hm7gn"
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false

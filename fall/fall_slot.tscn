@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjsw6nbiqypb3"]
+
+[ext_resource type="Shader" uid="uid://tq7fthphqfdh" path="res://fall/colorize.gdshader" id="1_cjnk0"]
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_qd5qi"]
+[ext_resource type="Script" uid="uid://b2wkgck7jmnng" path="res://fall/fall_slot.gd" id="3_2jykv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jykv"]
+resource_local_to_scene = true
+shader = ExtResource("1_cjnk0")
+shader_parameter/weighted = true
+shader_parameter/color = Color(0.868985, 0.868985, 0.868985, 1)
+
+[node name="FallSlot" type="TextureRect"]
+material = SubResource("ShaderMaterial_2jykv")
+custom_minimum_size = Vector2(60, 60)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_qd5qi")
+expand_mode = 1
+script = ExtResource("3_2jykv")
+color = Color(0.868985, 0.868985, 0.868985, 1)
