@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://fc6nhywrn811"]
+[gd_scene load_steps=17 format=3 uid="uid://fc6nhywrn811"]
 
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://b8l5r4bj2qayp" path="res://scenes/enemy.gd" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://bqce48e8yk0yv" path="res://scenes/coin.tscn" id="2_xwavj"]
 [ext_resource type="Script" uid="uid://cjs17fsukx7hw" path="res://components/hurtbox.gd" id="3_4ra3w"]
 [ext_resource type="Script" uid="uid://d4mwehpg3gyy8" path="res://components/health_component.gd" id="4_5uy6h"]
+[ext_resource type="Script" uid="uid://cq5t7iyk6uo5e" path="res://components/hitbox.gd" id="5_c4w8v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7p1mj"]
 radius = 64.0
@@ -61,8 +63,12 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xwavj"]
+radius = 93.0054
+
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_md0e3")
+drop_scene = ExtResource("2_xwavj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7p1mj")
@@ -109,3 +115,11 @@ metadata/_custom_type_script = "uid://d4mwehpg3gyy8"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_c4w8v")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("5_c4w8v")
+damage = 50
+metadata/_custom_type_script = "uid://cq5t7iyk6uo5e"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_xwavj")

@@ -1,7 +1,10 @@
+class_name Enemy
 extends CharacterBody2D
 
-@export var max_speed = 200
+signal drop_requested
 
+@export var max_speed = 200
+@export var drop_scene: PackedScene
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = $HealthBar
@@ -43,7 +46,8 @@ func _physics_process(delta):
 	#send_pos.rpc(global_position)
 
 func take_damage() -> void:
-	Debug.log("%s took damage" % [name])
+	pass
+	#Debug.log("%s took damage" % [name])
 	#take_damage_fx.rpc()
 
 
@@ -82,6 +86,8 @@ func send_pos(pos) -> void:
 
 
 func _death() -> void:
+	if drop_scene:
+		drop_requested.emit(drop_scene, global_position)
 	set_physics_process(false)
 	collision_shape_2d.set_deferred("disabled", true)
 	collision_shape_2d_hurtbox.set_deferred("disabled", true)
@@ -92,4 +98,3 @@ func _death() -> void:
 	await get_tree().create_timer(2).timeout
 	queue_free()
 	Game.enemies -= 1
-	

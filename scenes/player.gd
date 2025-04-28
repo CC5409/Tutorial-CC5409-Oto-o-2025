@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 signal enemy_spawn_requested
+signal death_requested
 
 @export var max_speed = 400
 @export var acceleration = 600
@@ -17,7 +18,18 @@ signal enemy_spawn_requested
 @onready var camera_2d: ShakingCamera = $Camera2D
 @onready var gun: Node2D = %Gun
 @onready var stick: Node2D = $Stick
+@onready var hurtbox: Hurtbox = $Hurtbox
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var hud: MarginContainer = $CanvasLayer/HUD
 
+
+func _ready() -> void:
+	health_component.health_changed.connect(func(value): health_bar.value = value)
+	health_bar.value = health_component.health
+	health_component.died.connect(_on_died)
+	Game.coins_changed.connect(_on_coins_changed)
+	hud.set_coins(0)
 
 func _physics_process(delta: float) -> void:
 	var move_input = input_synchronizer.move_input
@@ -61,6 +73,7 @@ func setup(player_data: Statics.PlayerData):
 	input_synchronizer.set_multiplayer_authority(player_data.id)
 	gun.setup(player_data)
 	camera_2d.enabled = is_multiplayer_authority()
+	hud.visible = is_multiplayer_authority()
 	if is_multiplayer_authority():
 		sync_timer.timeout.connect(_on_sync)
 		sync_timer.start()
@@ -96,3 +109,17 @@ func request_spawn(pos: Vector2) -> void:
 	if not multiplayer.is_server():
 		return
 	enemy_spawn_requested.emit(pos)
+
+func _on_died() -> void:
+	if multiplayer.is_server():
+		death_requested.emit()
+
+
+func is_dead() -> bool:
+	return health_component.health == 0
+
+
+func _on_coins_changed() -> void:
+	if is_multiplayer_authority():
+		var player = Game.get_current_player()
+		hud.set_coins(player.coins)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2viod7wludd5"]
+
+[ext_resource type="Script" uid="uid://lsktqbtpjllj" path="res://scenes/spectator.gd" id="1_jjbhc"]
+
+[node name="Spectator" type="Node"]
+script = ExtResource("1_jjbhc")

@@ -6,6 +6,7 @@ signal vote_updated(id)
 signal player_index_received()
 
 signal enemies_changed
+signal coins_changed
 
 @export var multiplayer_test = false
 @export var use_roles = true
@@ -187,3 +188,9 @@ func _handle_node_added(node: Node) -> void:
 		# Scene has been changed
 		change_window_scale = node is MainMenu or node is LobbyHostScreen or \
 			node is LobbyJoinScreen or node is LobbyWaitingScreen or node is Credits
+
+@rpc("call_local", "reliable")
+func add_coins() -> void:
+	for player in Game.players:
+		player.coins += 1
+	coins_changed.emit()
