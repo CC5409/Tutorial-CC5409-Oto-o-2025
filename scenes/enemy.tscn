@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://fc6nhywrn811"]
+[gd_scene load_steps=14 format=3 uid="uid://fc6nhywrn811"]
 
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://b8l5r4bj2qayp" path="res://scenes/enemy.gd" id="1_md0e3"]
 [ext_resource type="Script" uid="uid://cjs17fsukx7hw" path="res://components/hurtbox.gd" id="3_4ra3w"]
-[ext_resource type="PackedScene" uid="uid://djow5g6d3nsyy" path="res://components/health_component.tscn" id="4_c4w8v"]
+[ext_resource type="Script" uid="uid://d4mwehpg3gyy8" path="res://components/health_component.gd" id="4_5uy6h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7p1mj"]
 radius = 64.0
@@ -55,6 +55,8 @@ _data = {
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5uy6h"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c4w8v"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
@@ -89,8 +91,6 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_c4w8v")]
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
@@ -102,5 +102,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_xwavj")
 }
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="HealthComponent" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5uy6h")
+script = ExtResource("4_5uy6h")
+metadata/_custom_type_script = "uid://d4mwehpg3gyy8"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_c4w8v")

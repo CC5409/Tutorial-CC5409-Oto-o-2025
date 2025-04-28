@@ -17,9 +17,9 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	Game.enemies += 1
-	health_component.health_changed.connect(func(value): update_ui())
+	health_component.health_changed.connect(update_health_bar)
+	update_health_bar(health_component.health)
 	health_component.died.connect(_death)
-	update_ui()
 	hurtbox.damage_taken.connect(take_damage)
 	if multiplayer.is_server():
 		navigation_agent.velocity_computed.connect(_on_velocity_computed) 
@@ -50,20 +50,22 @@ func take_damage() -> void:
 @rpc("reliable", "call_local")
 func take_damage_fx() -> void:
 	var tween = create_tween()
-	#tween.tween_property(self, "modulate", Color.RED, 0.1)\
-		#.set_ease(Tween.EASE_OUT)\
-		#.set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(self, "modulate", Color.RED, 0.1)\
+		.set_ease(Tween.EASE_OUT)\
+		.set_trans(Tween.TRANS_EXPO)
 	tween\
+		.parallel()\
 		.tween_property(sprite_2d, "scale", Vector2.ONE * 1.2, 0.1).\
 		set_ease(Tween.EASE_OUT).\
 		set_trans(Tween.TRANS_EXPO)
-	#tween.tween_property(self, "modulate", Color.WHITE, 0.2)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	tween\
+		.parallel()\
 		.tween_property(sprite_2d, "scale", Vector2.ONE, 0.2)
 
 
-func update_ui() -> void:
-	health_bar.value = health_component.health
+func update_health_bar(value: float) -> void:
+	health_bar.value = value
 
 
 func set_movement_target(movement_target: Vector2):

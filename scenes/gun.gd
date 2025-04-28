@@ -1,14 +1,15 @@
+class_name Gun
 extends Node2D
 
 @export var bullet_scene: PackedScene
+@export var fire_rate: float = 2
+@export var mode: Weapon.GunMode
+
+
 @onready var bullet_spawner: MultiplayerSpawner = $BulletSpawner
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var bullet_spawn: Marker2D = $BulletSpawn
 
-
-func _physics_process(delta: float) -> void:
-	if is_multiplayer_authority():
-		rotation = global_position.direction_to(get_global_mouse_position()).angle()
 
 
 func setup(player_data: Statics.PlayerData):

@@ -14,8 +14,9 @@ signal enemy_spawn_requested
 @onready var pivot: Node2D = $Pivot
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var sync_timer: Timer = $SyncTimer
-@onready var gun: Node2D = $Gun
-@onready var camera_2d: Camera2D = $Camera2D
+@onready var camera_2d: ShakingCamera = $Camera2D
+@onready var gun: Node2D = %Gun
+@onready var stick: Node2D = $Stick
 
 
 func _physics_process(delta: float) -> void:
@@ -26,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		input_synchronizer.fire = false
 		if is_multiplayer_authority():
 			gun.fire.rpc_id(1, get_global_mouse_position())
-		
+			camera_2d.shake()
 		
 	if move_input.x:
 		pivot.scale.x = sign(move_input.x)
@@ -63,6 +64,7 @@ func setup(player_data: Statics.PlayerData):
 	if is_multiplayer_authority():
 		sync_timer.timeout.connect(_on_sync)
 		sync_timer.start()
+	stick.set_multiplayer_authority(player_data.id)
 
 @rpc("authority", "call_local", "unreliable_ordered")
 func test(meh):
