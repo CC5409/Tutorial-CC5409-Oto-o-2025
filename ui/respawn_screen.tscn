@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxi58qxrj7ee0"]
+
+[ext_resource type="Script" uid="uid://460c2ww4cuax" path="res://ui/respawn_screen.gd" id="1_b8d6q"]
+[ext_resource type="Texture2D" uid="uid://1g81mrpma4jk" path="res://assets/grenade.png" id="1_p77wi"]
+
+[node name="RespawnScreen" type="PanelContainer"]
+offset_top = 316.0
+offset_right = 373.0
+offset_bottom = 316.0
+script = ExtResource("1_b8d6q")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 128
+
+[node name="Container" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Respawning"
+
+[node name="Bar" type="TextureProgressBar" parent="MarginContainer/Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+step = 0.01
+value = 75.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("1_p77wi")
+
+[node name="TimeLabel" type="Label" parent="MarginContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "2.45"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

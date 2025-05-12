@@ -22,7 +22,6 @@ class PieceSegment:
 		type = new_type
 
 
-
 @export var width := 10:
 	set(value):
 		width = value
@@ -45,8 +44,6 @@ var piece_type: PieceType
 
 @onready var grid: GridContainer = %Grid
 @onready var label: Label = $VBoxContainer/Label
-
-
 
 
 func _ready() -> void:

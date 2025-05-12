@@ -11,6 +11,13 @@ func _ready() -> void:
 			current_player_index = player_data.index
 
 
+func disable() -> void:
+	for player_data in Game.players:
+		var player = player_data.instance as Player
+		if player:
+			player.camera_2d.enabled = false
+
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_right"):
 		next()

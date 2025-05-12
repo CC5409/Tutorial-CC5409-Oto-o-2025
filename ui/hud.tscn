@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw276ohrqn8q2"]
+[gd_scene load_steps=4 format=3 uid="uid://bw276ohrqn8q2"]
 
 [ext_resource type="Script" uid="uid://buxsij65a0bfc" path="res://ui/hud.gd" id="1_276te"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_rbyyf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_276te"]
+atlas = ExtResource("1_rbyyf")
+region = Rect2(32, 56, 24, 24)
 
 [node name="HUD" type="MarginContainer"]
 anchors_preset = 10
@@ -43,20 +47,29 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer"]
-modulate = Color(0.560784, 1, 0.145098, 0.564706)
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("1_rbyyf")
+theme_override_constants/separation = 20
 
-[node name="CoinsLabel" type="Label" parent="PanelContainer2/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer2/MarginContainer/HBoxContainer"]
+modulate = Color(0.560784, 1, 0.145098, 0.564706)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("AtlasTexture_276te")
+stretch_mode = 5
+
+[node name="CoinsLabel" type="Label" parent="PanelContainer2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/outline_size = 12
-text = "XX"
-horizontal_alignment = 1
+text = "XXX"
+horizontal_alignment = 2
+clip_text = true

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqatwkr42h6qg"]
+
+[ext_resource type="PackedScene" uid="uid://c07wh61rs3224" path="res://scenes/player.tscn" id="1_3ubl3"]
+[ext_resource type="Script" uid="uid://djfmon13xe18o" path="res://players/player_a.gd" id="2_yg5p4"]
+
+[node name="PlayerA" instance=ExtResource("1_3ubl3")]
+script = ExtResource("2_yg5p4")
+bullet_scene = null
+
+[node name="Sprite2D" parent="Pivot" index="0"]
+modulate = Color(1, 0.356863, 0.215686, 1)

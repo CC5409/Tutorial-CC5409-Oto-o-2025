@@ -99,13 +99,13 @@ animation = &"run"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jej6c"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f1ej7"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oprun"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a8ls1"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qfm1y"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f1ej7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oprun"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fulsm"]
 states/fire/node = SubResource("AnimationNodeAnimation_y4r1p")
@@ -114,7 +114,7 @@ states/idle/node = SubResource("AnimationNodeAnimation_d2wvv")
 states/idle/position = Vector2(345.6, 99.6)
 states/run/node = SubResource("AnimationNodeAnimation_3v2ag")
 states/run/position = Vector2(591.2, 100.88)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jej6c"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_f1ej7"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_oprun"), "idle", "fire", SubResource("AnimationNodeStateMachineTransition_a8ls1"), "fire", "idle", SubResource("AnimationNodeStateMachineTransition_qfm1y")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jej6c"), "idle", "fire", SubResource("AnimationNodeStateMachineTransition_a8ls1"), "fire", "idle", SubResource("AnimationNodeStateMachineTransition_qfm1y"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_f1ej7"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_oprun")]
 graph_offset = Vector2(-22, -43)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlg0r"]
@@ -124,7 +124,7 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.283357, 0.849587, 2.31028e-06, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
-radius = 13.1529
+radius = 8.24621
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d2wvv"]
 radius = 28.0
@@ -193,6 +193,8 @@ position = Vector2(0, -24)
 [node name="Gun" parent="Stick" instance=ExtResource("5_qlg0r")]
 unique_name_in_owner = true
 position = Vector2(58, 0)
+fire_rate = 20.0
+mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qhqgy")

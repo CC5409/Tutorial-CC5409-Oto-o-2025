@@ -1,10 +1,18 @@
 class_name Enemy
 extends CharacterBody2D
 
+enum FollowTarget {
+	NONE,
+	MOUSE,
+	PLAYER
+}
+
 signal drop_requested
 
 @export var max_speed = 200
 @export var drop_scene: PackedScene
+@export var follow_target: FollowTarget
+
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = $HealthBar
@@ -26,7 +34,7 @@ func _ready() -> void:
 	hurtbox.damage_taken.connect(take_damage)
 	if multiplayer.is_server():
 		navigation_agent.velocity_computed.connect(_on_velocity_computed) 
-		path_target_timer.timeout.connect(func(): set_movement_target(get_global_mouse_position()))
+		path_target_timer.timeout.connect(_on_update_target)
 
 func _physics_process(delta):
 	if not multiplayer.is_server():
@@ -98,3 +106,19 @@ func _death() -> void:
 	await get_tree().create_timer(2).timeout
 	queue_free()
 	Game.enemies -= 1
+
+
+func _on_update_target():
+	match follow_target:
+		FollowTarget.MOUSE:
+			set_movement_target(get_global_mouse_position())
+		FollowTarget.PLAYER:
+			var closest_player: Player
+			var closest_distance: float
+			for player_data in Game.players:
+				var player: Player = player_data.instance
+				var player_distance = global_position.distance_squared_to(player.global_position)
+				if not closest_player or player_distance < closest_distance:
+					closest_player = player
+					closest_distance = player_distance
+			set_movement_target(closest_player.global_position)

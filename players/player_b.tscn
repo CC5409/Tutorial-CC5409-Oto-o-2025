@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://m37h2u3m150a"]
+
+[ext_resource type="PackedScene" uid="uid://c07wh61rs3224" path="res://scenes/player.tscn" id="1_jakvk"]
+
+[node name="Player" instance=ExtResource("1_jakvk")]
+
+[node name="Sprite2D" parent="Pivot" index="0"]
+modulate = Color(1, 0.847059, 0.247059, 1)
+
+[node name="Gun" parent="Stick" index="1"]
+fire_rate = 100.0
+mode = 0

@@ -39,8 +39,9 @@ metadata/_custom_type_script = "uid://cq5t7iyk6uo5e"
 shape = SubResource("CircleShape2D_haq8l")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://dqofq1y6rbw5b")
 spawn_path = NodePath(".")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_gp1hk")
+
+[node name="FullAutoTimer" type="Timer" parent="."]
