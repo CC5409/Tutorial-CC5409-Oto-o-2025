@@ -5,8 +5,7 @@ extends Node2D
 @export var fire_rate: float = 2
 @export var mode: Weapon.GunMode
 
-var time_of_last_shot: int = 0
-
+var _time_of_last_shot: int = 0
 
 @onready var bullet_spawner: MultiplayerSpawner = $BulletSpawner
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
@@ -25,7 +24,6 @@ func setup(player_data: Statics.PlayerData):
 		bullet_spawner.add_spawnable_scene(bullet_scene.resource_path)
 
 func fire_pressed() -> void:
-	Debug.log("fire_pressed")
 	if not is_multiplayer_authority():
 		return
 	match mode:
@@ -34,12 +32,9 @@ func fire_pressed() -> void:
 		Weapon.GunMode.FULL_AUTO:
 			fire()
 			full_auto_timer.start()
-		Weapon.GunMode.BURST:
-			pass
 
 
 func fire_released() -> void:
-	Debug.log("fire_released")
 	if not is_multiplayer_authority():
 		return
 	match mode:
@@ -47,14 +42,14 @@ func fire_released() -> void:
 			pass
 		Weapon.GunMode.FULL_AUTO:
 			full_auto_timer.stop()
-		Weapon.GunMode.BURST:
-			pass
 
 
 func fire() -> void:
-	if time_of_last_shot + 1000 / fire_rate < Time.get_ticks_msec():
-		time_of_last_shot = Time.get_ticks_msec()
-		var target = get_global_mouse_position()
+	var target = get_global_mouse_position()
+	if mode == Weapon.GunMode.FULL_AUTO:
+		fire_server.rpc_id(1, target)
+	elif _time_of_last_shot + 1000 / fire_rate < Time.get_ticks_msec():
+		_time_of_last_shot = Time.get_ticks_msec()
 		fire_server.rpc_id(1, target)
 
 

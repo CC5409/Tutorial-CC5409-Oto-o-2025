@@ -147,7 +147,6 @@ func _on_enemy_drop_requested(drop_scene: PackedScene, pos: Vector2) -> void:
 @rpc("call_local", "reliable")
 func spawn_player(player_id: int, spawn_position: Vector2) -> void:
 	var player = Game.get_player(player_id)
-	Debug.log("spawning player")
 	if spectator:
 		spectator.disable()
 		spectator.queue_free()

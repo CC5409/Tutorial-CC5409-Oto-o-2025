@@ -4,5 +4,4 @@ extends Node
 enum GunMode {
 	SEMI_AUTO,
 	FULL_AUTO,
-	BURST
 }

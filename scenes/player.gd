@@ -142,4 +142,5 @@ func _on_coins_changed() -> void:
 		hud.set_coins(player.coins)
 
 func attack() -> void:
-	Debug.log("Player attack")
+	pass
+	#Debug.log("Player attack")

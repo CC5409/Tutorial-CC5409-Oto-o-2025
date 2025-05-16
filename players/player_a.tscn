@@ -9,3 +9,7 @@ bullet_scene = null
 
 [node name="Sprite2D" parent="Pivot" index="0"]
 modulate = Color(1, 0.356863, 0.215686, 1)
+
+[node name="Gun" parent="Stick" index="1"]
+fire_rate = 2.0
+mode = 0
